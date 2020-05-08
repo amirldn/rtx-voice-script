@@ -1,0 +1,4 @@
+easygui==0.98.1
+mutagen==1.44.0
+PyAudio @ file:///D:/Documents/GitHub/rtx-acapella/PyAudio-0.2.11-cp38-cp38-win32.whl
+pygame==2.0.0.dev8
