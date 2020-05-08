@@ -16,6 +16,7 @@ A python script that takes an input MP3 file and outputs an acapella version as 
 
 
 **Steps**
+
 1 ) Clone the repository and cd into it
 
     git clone https://github.com/amirmaula/rtx-acapella.git
@@ -41,10 +42,11 @@ If you face issues installing PyAudio, the .whl files are included for Python 3.
 
 Your new file will then be exported to the git cloned directory. 
 
+
 Results may vary with this and you can tweak the noise supression to what works for you. This can be used for songs and speech etc.
 
 
-
 This is work in progress and I am somewhat an amateur when it comes to coding so any improvements made to the code and constructive criticism is greatly appreciated.
+
 
 NVIDIA RTX is propriety software and belongs to NVIDIA and all rights are reserved. This program uses the NVIDIA RTX software as intended and does not use any exploitation.
