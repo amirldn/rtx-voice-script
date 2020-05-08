@@ -29,6 +29,7 @@ If you face issues installing PyAudio, the .whl files are included for Python 3.
     pip install PyAudio-0.2.11-cp37-cp37m-win32.whl
 
 3 ) Set RTX Voice's microphone input to your Stereo Mix / VB Audio Cable
+
 4 ) To execute the program, run it in your CLI like so:
 
     ./rtx-core.py -i [file input path] -o [file name for output]
