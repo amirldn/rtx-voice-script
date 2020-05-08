@@ -24,12 +24,9 @@ A python script that takes an input MP3 file and outputs an acapella version as 
 
     pip install -r requirements.txt 
 
-You will need to be running Python 3.8, 32bit for this requirements.txt to work, else just pip install these dependencies manually:
+If you face issues installing PyAudio, the .whl files are included for Python 3.7 and 3.8 and can be installed using
 
-    easygui==0.98.1  
-    mutagen==1.44.0  
-    PyAudio==0.2.11
-    pygame==2.0.0.dev8
+    pip install PyAudio-0.2.11-cp37-cp37m-win32.whl
 
 3 ) Set RTX Voice's microphone input to your Stereo Mix / VB Audio Cable
 4 ) To execute the program, run it in your CLI like so:
