@@ -14,8 +14,14 @@ def main(argv):
         codec = "MP3"
     else:
         codec = "FLAC"
-    mixer.init(devicename=select_speaker_output())
-    mic_input = choose_rtx_output()
+    if check_cfg_exists() == False:
+        # print("Config file not found... creating")
+        mixer.init(devicename=select_speaker_output())
+        mic_input = choose_rtx_output()
+    else:
+        mixer.init(devicename=cfg_read("speaker_output"))
+        # mixer.init(devicename=select_speaker_output())
+        mic_input = choose_rtx_output()
     print(input_song_path)
     mixer.music.load(input_song_path)
     if codec == "MP3":

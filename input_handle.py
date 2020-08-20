@@ -4,6 +4,7 @@ from pygame import mixer
 from pygame._sdl2 import get_num_audio_devices, get_audio_device_name
 import sys
 import getopt
+import json
 
 
 def convert(seconds):
@@ -19,8 +20,42 @@ def convert(seconds):
         seconds = "0"+str(seconds)
     return hours, mins, seconds
 
+def check_cfg_exists():
+    if os.path.isfile('./config.cfg'):
+        return True
+    else:
+        return False
+
+def create_cfg():
+    cfg = open("config.cfg", "w+")
+    print("Config Created")
+    cfg.close()
+
+def cfg_write(variable_name, value):
+    cfg = open("config.cfg", "a")
+    json.dump([str(variable_name), str(value)], cfg)
+    cfg.write("\n")
+    cfg.close()
+
+def cfg_read(variable_name):
+    cfg = open("config.cfg", "r")
+    cfg_list = json.load(cfg)
+    print(str(cfg_list))
+    if cfg_list[0] == variable_name:
+        return cfg_list[1]
+    # try:
+    #     cfg = open("config.cfg", "r")
+    #     cfg_list = json.load(cfg)
+    #     print(str(cfg_list))
+    #     if cfg_list[0] == variable_name:
+    #         return cfg_list[1]
+    # except:
+    #     print("Failed to load config file, falling back")
+    #     return select_speaker_output()
 
 def select_speaker_output():
+    if not check_cfg_exists():
+        create_cfg()
     print("--- SPEAKER OUTPUT ---")
     mixer.init()
     speakerDevices = [
@@ -43,6 +78,7 @@ def select_speaker_output():
         loop_count += 1
     print("\nIf VB Audio is not found here, please check it is not disabled.")
     speaker_choice = input("\nPlease select the VB Audio speaker input: ")
+    cfg_write("speaker_output", speakerDevices[int(speaker_choice)])
     return speakerDevices[int(speaker_choice)]
 
     return None
