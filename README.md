@@ -4,18 +4,19 @@
 
 
 
-A python script that takes an input MP3 file and outputs an acapella version as a WAV using the power of NVIDIA's RTX Voice. Since RTX Voice is closed source, this records files in real-time so should be used for experimental purposes and for library overhauls.
+A python script that takes an input MP3/FLAC file and outputs an acapella version as a WAV using the power of NVIDIA's RTX Voice. Since RTX Voice is closed source, this records files in real-time so should be used for experimental purposes and for library overhauls.
 
 ## Getting Started
 
 **Requirements**
 
- - A Windows PC running NVIDIA RTX Voice (GTX GPU's work fine for this) [https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/](https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/)
- - Support for Stereo Mix or just install VB Audio (Virtual Cable) [https://www.vb-audio.com/Voicemeeter/](https://www.vb-audio.com/Voicemeeter/)
- - Python 3.8
+ - A Windows PC running NVIDIA RTX Voice (GTX GPU's work fine for this using this [guide](https://www.windowscentral.com/how-enable-rtx-voice-all-nvidia-gpus-including-older-geforce-gtx-cards)) [https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/](https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/)
+ - VB Audio (Virtual Cable) [https://www.vb-audio.com/Voicemeeter/](https://www.vb-audio.com/Voicemeeter/)
+ - Python 3.7
 
 
 **Steps**
+
 1 ) Clone the repository and cd into it
 
     git clone https://github.com/amirmaula/rtx-acapella.git
@@ -24,14 +25,15 @@ A python script that takes an input MP3 file and outputs an acapella version as 
 
     pip install -r requirements.txt 
 
-You will need to be running Python 3.8, 32bit for this requirements.txt to work, else just pip install these dependencies manually:
+If you face issues installing PyAudio, the .whl files are included for Python 3.7 and can be installed using
 
-    easygui==0.98.1  
-    mutagen==1.44.0  
-    PyAudio==0.2.11
-    pygame==2.0.0.dev8
+    pip install wheel
+    pip install ./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
+    
+    ^ for 64 Bit installations of Python 3.7
 
-3 ) Set RTX Voice's microphone input to your Stereo Mix / VB Audio Cable
+3 ) Set RTX Voice's microphone input to your VB Audio Cable (Virtual AUX)
+
 4 ) To execute the program, run it in your CLI like so:
 
     ./rtx-core.py -i [file input path] -o [file name for output]
@@ -41,12 +43,24 @@ You will need to be running Python 3.8, 32bit for this requirements.txt to work,
     ./rtx-core.py -i ./Users/user/Downloads/cool_song.mp3 -o new_song
 
 
-Your new file will then be exported to the git cloned directory. 
+5 ) Follow the on screen prompts. 
 
-Results may vary with this and you can tweak the noise supression to what works for you. This can be used for songs and speech etc.
+6 ) Your new file will then be exported to code's directory. 
 
+
+**To-do**
+
+- ~~Add FLAC support~~ **DONE**
+- Create and load config file so that the user does not need to select input/output everytime
+- Add GUI
+- Add a real-time timer of how long a file has been playing for
+
+
+
+Results may vary with this and you can tweak the noise suppression to what works for you. This can be used for songs and speech etc.
 
 
 This is work in progress and I am somewhat an amateur when it comes to coding so any improvements made to the code and constructive criticism is greatly appreciated.
+
 
 NVIDIA RTX is propriety software and belongs to NVIDIA and all rights are reserved. This program uses the NVIDIA RTX software as intended and does not use any exploitation.

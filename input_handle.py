@@ -21,6 +21,7 @@ def convert(seconds):
 
 
 def select_speaker_output():
+    print("--- SPEAKER OUTPUT ---")
     mixer.init()
     speakerDevices = [
         get_audio_device_name(x, 0).decode() for x in range(get_num_audio_devices(0))
@@ -28,12 +29,12 @@ def select_speaker_output():
     mixer.quit()
     # print(speakerDevices)
     for i in speakerDevices:
-        if "AUX" in i:
+        if ("AUX" or "Stereo Mix") in i:
             print("\nUsing " + i)
             valid = input("Is this correct (y/n)?  ")
             if valid.lower() == "y":
                 return speakerDevices[speakerDevices.index(i)]
-    print("\nCould not find VB Audio AUX.")
+    print("\nCould not find VB Audio AUX")
 
     loop_count = 0
     print("\nAudio Options: ")

@@ -4,6 +4,7 @@ import pyaudio
 
 
 def choose_rtx_output():
+    print(" --- RTX INPUT ---")
     pyaudio_rtx_instance = pyaudio.PyAudio()
     info = pyaudio_rtx_instance.get_host_api_info_by_index(0)
     numdevices = info.get("deviceCount")
@@ -19,10 +20,14 @@ def choose_rtx_output():
             # print("Input ID ", i, " - ", device)
             if "NVIDIA RTX Voice" in device:
                 print("\nUsing " + device)
-                valid = input("Is this correct (y/n)?  ")
-                if valid.lower() == "y":
-                    pyaudio_rtx_instance.terminate()
-                    return i
+                pyaudio_rtx_instance.terminate()
+                return i
+
+                # Re-enable to have valid check for the RTX Mic
+                # valid = input("Is this correct (y/n)?  ")
+                # if valid.lower() == "y":
+                #     pyaudio_rtx_instance.terminate()
+                #     return i
 
     # If RTX not found then
     print("\n Could not find NVIDIA RTX Microphone.\n")
@@ -38,18 +43,23 @@ def choose_rtx_output():
             ).get("name")
             print( str(i)+ ".", device)
 
-    print("\nIf RTX Microphone is not found here, please check it is not disabled.")
+    print("\nIf RTX Microphone is not found here, please check it is not disabled and is installed correctly.")
     microphone_choice = input("\nPlease select the RTX Microphone input to record: ")
     return int(microphone_choice)
 
 
-def record(length=10, user_output_name="file", mic_input=''):
+def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000):
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
-    RATE = 44100
+    RATE = bitrate_input
     CHUNK = 1024
     RECORD_SECONDS = length
-    WAVE_OUTPUT_FILENAME = user_output_name + ".wav"
+
+    if ".wav" not in user_output_name:
+        WAVE_OUTPUT_FILENAME = user_output_name + ".wav"
+    else:
+        WAVE_OUTPUT_FILENAME = user_output_name
+
 
     pyaudio_inst = pyaudio.PyAudio()
 
@@ -62,14 +72,14 @@ def record(length=10, user_output_name="file", mic_input=''):
         input=True,
         frames_per_buffer=CHUNK,
     )
-    print("Recording to memory...")
+    print("Recording to RAM...")
 
     frames = []
 
     for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         data = stream.read(CHUNK)
         frames.append(data)
-    print("Song complete, writing to disk...")
+    print("\nWriting to .wav...")
 
     # Stop recording
     stream.stop_stream()
@@ -82,5 +92,6 @@ def record(length=10, user_output_name="file", mic_input=''):
     waveFile.setframerate(RATE)
     waveFile.writeframes(b"".join(frames))
     waveFile.close()
+    print("Complete!\n")
     print("Written to " + WAVE_OUTPUT_FILENAME)
     return None
