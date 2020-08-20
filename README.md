@@ -4,13 +4,13 @@
 
 
 
-A python script that takes an input MP3 file and outputs an acapella version as a WAV using the power of NVIDIA's RTX Voice. Since RTX Voice is closed source, this records files in real-time so should be used for experimental purposes and for library overhauls.
+A python script that takes an input MP3/FLAC file and outputs an acapella version as a WAV using the power of NVIDIA's RTX Voice. Since RTX Voice is closed source, this records files in real-time so should be used for experimental purposes and for library overhauls.
 
 ## Getting Started
 
 **Requirements**
 
- - A Windows PC running NVIDIA RTX Voice (GTX GPU's work fine for this) [https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/](https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/)
+ - A Windows PC running NVIDIA RTX Voice (GTX GPU's work fine for this using this [https://www.windowscentral.com/how-enable-rtx-voice-all-nvidia-gpus-including-older-geforce-gtx-cards](guide)) [https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/](https://www.nvidia.com/en-us/geforce/guides/nvidia-rtx-voice-setup-guide/)
  - Support for Stereo Mix or just install VB Audio (Virtual Cable) [https://www.vb-audio.com/Voicemeeter/](https://www.vb-audio.com/Voicemeeter/)
  - Python 3.8
 
