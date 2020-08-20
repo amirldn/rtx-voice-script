@@ -2,6 +2,8 @@ import wave
 
 import pyaudio
 
+from input_handle import cfg_write
+
 
 def choose_rtx_output():
     print(" --- RTX INPUT ---")
@@ -21,6 +23,7 @@ def choose_rtx_output():
             if "NVIDIA RTX Voice" in device:
                 print("\nUsing " + device)
                 pyaudio_rtx_instance.terminate()
+                cfg_write("mic_input", str(i))
                 return i
 
                 # Re-enable to have valid check for the RTX Mic

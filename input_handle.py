@@ -5,6 +5,11 @@ from pygame._sdl2 import get_num_audio_devices, get_audio_device_name
 import sys
 import getopt
 import json
+import configparser
+
+
+
+cfg = configparser.ConfigParser()
 
 
 def convert(seconds):
@@ -26,36 +31,27 @@ def check_cfg_exists():
     else:
         return False
 
-def create_cfg():
-    cfg = open("config.cfg", "w+")
-    print("Config Created")
-    cfg.close()
+def cfg_create():
+    with open('config.cfg', 'w') as cfg_file:
+        cfg['AUDIO DEVICES'] = {'speaker_output': ''}
+        cfg.write(cfg_file)
 
 def cfg_write(variable_name, value):
-    cfg = open("config.cfg", "a")
-    json.dump([str(variable_name), str(value)], cfg)
-    cfg.write("\n")
-    cfg.close()
+    with open('config.cfg', 'w') as cfg_file:
+        cfg['AUDIO DEVICES'][variable_name] = value
+        cfg.write(cfg_file)
 
 def cfg_read(variable_name):
-    cfg = open("config.cfg", "r")
-    cfg_list = json.load(cfg)
-    print(str(cfg_list))
-    if cfg_list[0] == variable_name:
-        return cfg_list[1]
-    # try:
-    #     cfg = open("config.cfg", "r")
-    #     cfg_list = json.load(cfg)
-    #     print(str(cfg_list))
-    #     if cfg_list[0] == variable_name:
-    #         return cfg_list[1]
-    # except:
-    #     print("Failed to load config file, falling back")
-    #     return select_speaker_output()
+    try:
+        cfg.read('config.cfg')
+        return cfg['AUDIO DEVICES'][variable_name]
+    except:
+        print("Failed to load config file, falling back")
+        return select_speaker_output()
 
 def select_speaker_output():
     if not check_cfg_exists():
-        create_cfg()
+        cfg_create()
     print("--- SPEAKER OUTPUT ---")
     mixer.init()
     speakerDevices = [
@@ -92,10 +88,12 @@ def song_select():
 def arguments(argv):
     inputfile = ''
     outputfile = ''
+    reset = 0
     try:
         opts, args = getopt.getopt(argv, "hi:o:", ["ifile=", "ofile="])
-    except getopt.GetoptError:
+    except getopt.GetoptError as err:
         print ('rtx-core.py -i <file input path> -o <file name for output>')
+        print (str(err))
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
@@ -106,10 +104,9 @@ def arguments(argv):
         elif opt in ("-o", "--ofile"):
             outputfile = arg
     if outputfile == '':
-        outputfile = "rtx-export"
+        outputfile = inputfile+"_rtx"
     if inputfile == '':
+        print("\n--- Input file missing ---\n")
         print ('rtx-core.py -i <file input path> -o <file name for output>')
         sys.exit(2)
-    # print ('Input file is', inputfile)
-    # print ('Output file is', outputfile)
     return inputfile,outputfile

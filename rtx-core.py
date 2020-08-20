@@ -1,6 +1,7 @@
 import time
 import sys
 import getopt
+import os
 
 from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
@@ -20,9 +21,7 @@ def main(argv):
         mic_input = choose_rtx_output()
     else:
         mixer.init(devicename=cfg_read("speaker_output"))
-        # mixer.init(devicename=select_speaker_output())
-        mic_input = choose_rtx_output()
-    print(input_song_path)
+        mic_input = int(cfg_read("mic_input"))
     mixer.music.load(input_song_path)
     if codec == "MP3":
         input_track = MP3(input_song_path)
@@ -32,7 +31,7 @@ def main(argv):
     hours, mins, seconds = convert(length_of_input_song)
     bitrate_of_input_song = int(input_track.info.sample_rate)
 
-    print("\nNow Playing: " + input_song_path + "\n")
+    print("\nNow Processing: " + input_song_path + "\n")
     print("Bitrate: " + str(bitrate_of_input_song))
     print('Duration: %s:%s:%s' % (hours, mins, seconds))
     mixer.music.play()  # Play it

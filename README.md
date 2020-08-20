@@ -55,6 +55,10 @@ If you face issues installing PyAudio, the .whl files are included for Python 3.
 - Add GUI
 - Add a real-time timer of how long a file has been playing for
 
+**Known Issues**
+- Sometimes the config file will get messed up so just delete the config.cfg
+- The code will crash if the folder you wish to export your .wav to does not already exist, so just create the folder beforehand and it will save with no issues
+
 
 
 Results may vary with this and you can tweak the noise suppression to what works for you. This can be used for songs and speech etc.
