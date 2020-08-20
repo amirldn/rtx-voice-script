@@ -51,7 +51,7 @@ If you face issues installing PyAudio, the .whl files are included for Python 3.
 **To-do**
 
 - ~~Add FLAC support~~ **DONE**
-- Create and load config file so that the user does not need to select input/output everytime
+- ~~Create and load config file so that the user does not need to select input/output everytime~~ **DONE**
 - Add GUI
 - Add a real-time timer of how long a file has been playing for
 
