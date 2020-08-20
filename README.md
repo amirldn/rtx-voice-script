@@ -36,11 +36,11 @@ If you face issues installing PyAudio, the .whl files are included for Python 3.
 
 4 ) To execute the program, run it in your CLI like so:
 
-    ./rtx-core.py -i [file input path] -o [file name for output]
+    ./rtx-core.py -i [input path] -o [file directory & name for output]
    For example
    
 
-    ./rtx-core.py -i ./Users/user/Downloads/cool_song.mp3 -o new_song
+    ./rtx-core.py -i song.flac -o D:\Music\Acapella\cool_song.wav
 
 
 5 ) Follow the on screen prompts. 
