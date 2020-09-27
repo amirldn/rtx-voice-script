@@ -1,5 +1,5 @@
 
-# rtx_acapella
+# rtx-voice-script
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![HitCount](http://hits.dwyl.com/amirmaula/rtx-acapella.svg)](http://hits.dwyl.com/amirmaula/rtx-acapella)
 
 
@@ -19,7 +19,7 @@ A python script that takes an input MP3/FLAC file and outputs an acapella versio
 
 1 ) Clone the repository and cd into it
 
-    git clone https://github.com/amirmaula/rtx-acapella.git
+    git clone https://github.com/amirmaula/rtx-voice-script.git
 
 2 ) Install the prerequisites via
 
