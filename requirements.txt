@@ -2,4 +2,4 @@ easygui==0.98.1
 mutagen==1.44.0
 PyAudio==0.2.11
 pygame==2.0.0.dev8
-wheel==0.35.1
+wheel==0.38.1
