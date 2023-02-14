@@ -48,6 +48,7 @@ def choose_rtx_output():
 
     print("\nIf RTX Microphone is not found here, please check it is not disabled and is installed correctly.")
     microphone_choice = input("\nPlease select the RTX Microphone input to record: ")
+    cfg_write("mic_input", str(microphone_choice))
     return int(microphone_choice)
 
 

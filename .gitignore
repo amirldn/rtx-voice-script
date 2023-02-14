@@ -1,1 +1,4 @@
-/config.cfg
+__pycache__/
+debug/
+*.cfg
+python-warpdrive
