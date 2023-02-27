@@ -1,4 +1,3 @@
-import time
 import sys
 import getopt
 import os

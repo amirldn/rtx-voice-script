@@ -1,7 +1,6 @@
 import wave
-
 import pyaudio
-
+from tqdm import tqdm
 from input_handle import cfg_write
 
 
@@ -80,7 +79,7 @@ def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000)
 
     frames = []
 
-    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+    for i in tqdm(range(0, int(RATE / CHUNK * RECORD_SECONDS))):
         data = stream.read(CHUNK)
         frames.append(data)
     print("\nWriting to .wav...")
