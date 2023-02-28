@@ -1,0 +1,4 @@
+[AUDIO DEVICES]
+speaker_output = CABLE Input (VB-Audio Virtual Cable)
+mic_input = 3
+

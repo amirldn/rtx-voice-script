@@ -1,1 +1,20 @@
-/config.cfg
+# parts for development
+__pycache__/
+debug/
+
+# local config
+*.cfg
+
+# external tool
+python-warpdrive
+
+# all video formats
+*.mov
+*.avi
+*.mp4
+
+# all audio formats
+*.flac
+*.wav
+*.mp3
+*.aac

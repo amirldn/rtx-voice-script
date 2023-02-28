@@ -1,7 +1,6 @@
 import wave
-
 import pyaudio
-
+from tqdm import tqdm
 from input_handle import cfg_write
 
 
@@ -48,6 +47,7 @@ def choose_rtx_output():
 
     print("\nIf RTX Microphone is not found here, please check it is not disabled and is installed correctly.")
     microphone_choice = input("\nPlease select the RTX Microphone input to record: ")
+    cfg_write("mic_input", str(microphone_choice))
     return int(microphone_choice)
 
 
@@ -79,7 +79,7 @@ def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000)
 
     frames = []
 
-    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+    for i in tqdm(range(0, int(RATE / CHUNK * RECORD_SECONDS))):
         data = stream.read(CHUNK)
         frames.append(data)
     print("\nWriting to .wav...")
