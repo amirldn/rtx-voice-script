@@ -5,6 +5,7 @@ import time
 
 from mutagen.mp3 import MP3
 from mutagen.flac import FLAC
+from mutagen.wave import WAVE
 
 from input_handle import *
 from record_handle import *
@@ -34,8 +35,8 @@ def main(argv):
         codec = "MP3"
         convert = True
     elif "wav" in input_file_extension.lower():
-        codec = "MP3"
-        convert = True
+        codec = "WAVE"
+        convert = False
 
     # Convert the input file to MP3 if it is not already
     if convert == True:
@@ -64,15 +65,19 @@ def main(argv):
         input_track = MP3(input_song_path)
     elif codec == "FLAC":
         input_track = FLAC(input_song_path)
+    elif codec == "WAVE":
+        input_track = WAVE(input_song_path)
     
     length_of_input_song = int(input_track.info.length)
     hours, mins, seconds = convertTime(length_of_input_song)
-    bitrate_of_input_song = int(input_track.info.sample_rate)
+    bitrate_of_input_song = int(input_track.info.bitrate)
     sample_rate_input_song = int(input_track.info.sample_rate)
+    channels = int(input_track.info.channels)
 
     # Print some info about the song to the console
     print("\nNow Processing: " + input_song_path + "\n")
-    print("SampleRat: " + str(bitrate_of_input_song))
+    print("SampleRate: " + str(sample_rate_input_song))
+    print("Bitrate: " + str(bitrate_of_input_song))
     print('Duration: %s:%s:%s' % (hours, mins, seconds))
     print("Playbacktime is in Realtime, this tool tunnels the audio to the RTX Voice Input")
     print("Endtime: " + add_time(hours, mins, seconds))
@@ -82,7 +87,8 @@ def main(argv):
     length_of_input_song+addTimepaddding,
     export_song_path,
     mic_input,
-    bitrate_of_input_song
+    sample_rate_input_song,
+    channels=channels
     )
     mixer.music.stop()  # Stop it
     mixer.quit()  # Quit it
