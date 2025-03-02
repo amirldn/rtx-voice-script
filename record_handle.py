@@ -51,10 +51,11 @@ def choose_rtx_output():
     return int(microphone_choice)
 
 
-def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000):
+def record(length=10, user_output_name="file", mic_input='',
+           sample_rate=48000, channels=2):
     FORMAT = pyaudio.paInt16
-    CHANNELS = 2
-    RATE = bitrate_input
+    CHANNELS = channels
+    RATE = sample_rate
     CHUNK = 1024
     RECORD_SECONDS = length
 
@@ -71,7 +72,7 @@ def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000)
         format=FORMAT,
         channels=CHANNELS,
         input_device_index=mic_input,
-        rate=RATE,
+        rate=sample_rate,
         input=True,
         frames_per_buffer=CHUNK,
     )
@@ -90,9 +91,9 @@ def record(length=10, user_output_name="file", mic_input='',bitrate_input=48000)
     pyaudio_inst.terminate()
 
     waveFile = wave.open(WAVE_OUTPUT_FILENAME, "wb")
-    waveFile.setnchannels(CHANNELS)
+    waveFile.setnchannels(channels)
     waveFile.setsampwidth(pyaudio_inst.get_sample_size(FORMAT))
-    waveFile.setframerate(RATE)
+    waveFile.setframerate(sample_rate)
     waveFile.writeframes(b"".join(frames))
     waveFile.close()
     print("Complete!\n")
